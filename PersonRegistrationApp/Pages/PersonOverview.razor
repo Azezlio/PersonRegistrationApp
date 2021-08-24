@@ -1,0 +1,45 @@
+﻿@page "/personOverview"
+
+
+<h1>Registered People</h1>
+
+@if (People == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Person ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in People)
+            {
+            <tr>
+                <td>@person.PersonId</td>
+                <td>@person.FirstName</td>
+                <td>@person.LastName</td>
+                <td>
+                    <a href="@($"persondetail/{person.PersonId}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-info-circle"></i>
+                        Person Details
+                    </a>
+                    <a href="@($"personedit/{person.PersonId}")" class="btn btn-primary table-btn">
+                        <i class="fas fa-edit"></i>
+                        Edit Person
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

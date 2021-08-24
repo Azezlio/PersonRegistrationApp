@@ -1,0 +1,75 @@
+﻿@page "/personedit"
+@page "/personedit/{PersonId}"
+
+
+@if (!Saved)
+{
+    <section>
+        <h1>Details for @Person.FirstName @Person.LastName</h1>
+        <EditForm Model="@Person" OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary></ValidationSummary>
+
+
+            <div class="form-group row">
+                <label for="firstName">First name: </label>
+                <InputText id="firstName" @bind-Value="@Person.FirstName" placeholder="Enter first name"></InputText>
+                <ValidationMessage For="@(() => Person.FirstName)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="lastName">Last name: </label>
+                <InputText id="lastName" @bind-Value="@Person.LastName" placeholder="Enter last name"></InputText>
+                <ValidationMessage For="@(() => Person.LastName)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="birthdate">Birthdate: </label>
+                <InputDate id="birthdate" @bind-Value="@Person.BirthDate" placeholder="Enter birthdate"></InputDate>
+
+            </div>
+            <div class="form-group row">
+                <label for="email">Email: </label>
+                <InputText id="email" @bind-Value="@Person.Email" placeholder="Enter email"></InputText>
+                <ValidationMessage For="@(() => Person.Email)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="street">Street: </label>
+                <InputText id="street" @bind-Value="@Person.Street" placeholder="Enter street"></InputText>
+
+            </div>
+
+            <div class="form-group row">
+                <label for="zip">Zip code: </label>
+                <InputText id="zip" @bind-Value="@Person.Zip" placeholder="Enter zip code"></InputText>
+
+            </div>
+
+            <div class="form-group row">
+                <label for="city">City: </label>
+                <InputText id="city" @bind-Value="@Person.City" placeholder="Enter city"></InputText>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary edit-btn">Save person</button>
+
+            @if (Person.PersonId > 0)
+            {
+                <a class="btn btn-danger" @onclick="@DeletePerson">
+                    Delete
+                </a>
+            }
+
+            <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+        </EditForm>
+    </section>
+
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+
+
+}
